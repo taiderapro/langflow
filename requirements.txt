@@ -8,3 +8,4 @@ pypdf
 python-docx
 tiktoken
 sentence-transformers
+langchain_community
