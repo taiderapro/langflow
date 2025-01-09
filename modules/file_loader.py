@@ -1,7 +1,7 @@
 import os
 from langchain.document_loaders import PyPDFLoader, TextLoader
 from langchain.schema import Document
-from docx import Document as DocxDocumenthttps://github.com/taiderapro/langflow/blob/main/modules/file_loader.py
+from docx import Document as DocxDocument
 from tempfile import NamedTemporaryFile
 import logging
 
