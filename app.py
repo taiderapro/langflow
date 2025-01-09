@@ -37,14 +37,16 @@ if uploaded_files:
         logger.error("Erro ao processar arquivos", exc_info=True)
 
 # Criar armazenamento vetorial
+# Criar armazenamento vetorial com novo modelo de embeddings
 vector_store = None
 if documents:
     try:
-        vector_store = create_vector_store(documents, api_key, model="text-embedding-3-small")
+        vector_store = create_vector_store(
+            documents, api_key, model="text-embedding-3-small"  # Modelo da OpenAI
+        )
         st.success("Armazenamento vetorial criado com sucesso!")
-        logger.info("Armazenamento vetorial criado com sucesso.")
     except Exception as e:
-        logger.error(f"Erro ao criar armazenamento vetorial: {str(e)}", exc_info=True)
+        logger.error("Erro ao criar o armazenamento vetorial", exc_info=True)
         st.error("Erro ao criar armazenamento vetorial. Consulte o log para mais detalhes.")
 
 # Inicializar o chatbot
