@@ -39,7 +39,7 @@ def export_to_docx(lesson_plan, file_name="Plano_de_Aula.docx"):
     return docx_buffer
 
 # Configuração inicial
-st.set_page_config(page_title="Agente de IA para Professores", layout="wide")
+
 st.title("Agente de IA para Professores")
 
 # Configurações de API
