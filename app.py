@@ -8,6 +8,9 @@ from modules.vector_store import create_vector_store
 from docx import Document
 from io import BytesIO
 
+from modules.logger import get_logger
+logger = get_logger(__name__)
+
 def export_to_docx(lesson_plan, file_name="Plano_de_Aula.docx"):
     """Exporta o plano de aula para um arquivo DOCX."""
     document = Document()
