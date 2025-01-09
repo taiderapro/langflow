@@ -54,7 +54,11 @@ if documents:
     st.success("Armazenamento vetorial criado com sucesso!")
 
 # Inicializar o chatbot com o armazenamento vetorial
-chatbot = Chatbot(api_key=api_key, vector_store=vector_store)
+try:
+    chatbot = ChatOpenAI(api_key=api_key, model="gpt-3.5-turbo", request_timeout=30)
+except Exception as e:
+    st.error(f"Erro ao conectar com o modelo OpenAI: {str(e)}")
+    st.stop()
 
 # Chatbot interativo
 st.header("Chatbot Interativo")
