@@ -1,6 +1,7 @@
 import streamlit as st
 import os
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
+from langchain.chat_models import ChatOpenAI
 from modules.chat import Chatbot
 from modules.file_loader import process_uploaded_files
 from modules.vector_store import create_vector_store
