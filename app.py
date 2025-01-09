@@ -1,4 +1,8 @@
 import streamlit as st
+from modules.logger import get_logger
+# Configuração inicial do Streamlit
+st.set_page_config(page_title="Agente de IA para Professores", layout="wide")
+
 import os
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 from langchain.chat_models import ChatOpenAI
@@ -7,7 +11,6 @@ from modules.file_loader import process_uploaded_files
 from modules.vector_store import create_vector_store
 from docx import Document
 from io import BytesIO
-from modules.logger import get_logger
 
 # Inicializar logger
 logger = get_logger(__name__)
