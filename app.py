@@ -65,14 +65,16 @@ if uploaded_files:
 
 # Criar armazenamento vetorial
 # Criar armazenamento vetorial
+# Criar armazenamento vetorial com novo modelo de embeddings
 vector_store = None
 if documents:
     try:
-        vector_store = create_vector_store(documents, api_key)
+        vector_store = create_vector_store(
+            documents, api_key, model="text-embedding-3-small"
+        )
         st.success("Armazenamento vetorial criado com sucesso!")
-        logger.info("Armazenamento vetorial criado com sucesso.")
-    except RuntimeError as e:
-        logger.error("Erro ao criar o armazenamento vetorial: %s", str(e), exc_info=True)
+    except Exception as e:
+        logger.error("Erro ao criar o armazenamento vetorial", exc_info=True)
         st.error("Erro ao criar armazenamento vetorial. Consulte o log para mais detalhes.")
 
 
@@ -107,7 +109,9 @@ if chat_submitted and user_input:
 if st.session_state.chat_submitted:
     if vector_store:
         from langchain.chains import RetrievalQA
+        # Configurar o retriever
         retriever = vector_store.as_retriever()
+        # Configurar a cadeia de perguntas e respostas
         qa_chain = RetrievalQA.from_chain_type(
             llm=chatbot.model,
             retriever=retriever
