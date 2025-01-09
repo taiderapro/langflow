@@ -1,15 +1,20 @@
 import logging
+import os
 
-# Configuração do logger
+# Diretório onde o log será salvo
+LOG_DIR = "logs"
+os.makedirs(LOG_DIR, exist_ok=True)  # Cria o diretório de logs, se não existir
+
+# Caminho do arquivo de log
+LOG_FILE = os.path.join(LOG_DIR, "app.log")
+
+# Configuração básica do logger
 logging.basicConfig(
-    filename="app_logs.log",  # Nome do arquivo de log
-    level=logging.ERROR,  # Nível de log (ERROR para capturar erros)
+    filename=LOG_FILE,
+    level=logging.DEBUG,  # Altere para INFO, WARNING, ERROR conforme necessário
     format="%(asctime)s - %(levelname)s - %(message)s",
 )
 
-try:
-    # Exemplo de operação que pode gerar um erro
-    vector_store = create_vector_store(documents, api_key)
-except Exception as e:
-    logging.error("Erro ao criar armazenamento vetorial", exc_info=True)  # Log detalhado
-    st.error("Erro ao criar armazenamento vetorial. Consulte o log para mais detalhes.")
+# Função para obter o logger configurado
+def get_logger(name):
+    return logging.getLogger(name)
