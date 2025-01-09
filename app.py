@@ -64,10 +64,17 @@ if uploaded_files:
         st.sidebar.error(str(e))
 
 # Criar armazenamento vetorial
+# Criar armazenamento vetorial
 vector_store = None
 if documents:
-    vector_store = create_vector_store(documents, api_key)
-    st.success("Armazenamento vetorial criado com sucesso!")
+    try:
+        vector_store = create_vector_store(documents, api_key)
+        st.success("Armazenamento vetorial criado com sucesso!")
+        logger.info("Armazenamento vetorial criado com sucesso.")
+    except RuntimeError as e:
+        logger.error("Erro ao criar o armazenamento vetorial: %s", str(e), exc_info=True)
+        st.error("Erro ao criar armazenamento vetorial. Consulte o log para mais detalhes.")
+
 
 # Inicializar o chatbot com o armazenamento vetorial
 try:
