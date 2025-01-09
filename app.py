@@ -7,10 +7,19 @@ from modules.file_loader import process_uploaded_files
 from modules.vector_store import create_vector_store
 from docx import Document
 from io import BytesIO
-
 from modules.logger import get_logger
+
+# Inicializar logger
 logger = get_logger(__name__)
 
+# Log de sucesso ou erro
+try:
+    vector_store = create_vector_store(documents, api_key)
+    logger.info("Armazenamento vetorial criado com sucesso.")
+except Exception as e:
+    logger.error("Erro ao criar o armazenamento vetorial", exc_info=True)
+    st.error("Erro ao criar armazenamento vetorial. Consulte o log para mais detalhes.")
+    
 def export_to_docx(lesson_plan, file_name="Plano_de_Aula.docx"):
     """Exporta o plano de aula para um arquivo DOCX."""
     document = Document()
