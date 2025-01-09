@@ -1,5 +1,4 @@
 import streamlit as st
-from dotenv import load_dotenv
 import os
 from langchain.schema import SystemMessage, HumanMessage, AIMessage
 from modules.chat import Chatbot
@@ -24,14 +23,14 @@ def export_to_docx(lesson_plan, file_name="Plano_de_Aula.docx"):
     return docx_buffer
 
 # Configuração inicial
-load_dotenv()
 st.set_page_config(page_title="Agente de IA para Professores", layout="wide")
 st.title("Agente de IA para Professores")
 
 # Configurações de API
-api_key = st.secrets["OPENAI_API_KEY"]
-if not api_key:
-    st.error("Por favor, configure a variável OPENAI_API_KEY no arquivo .env.")
+try:
+    api_key = st.secrets["OPENAI_API_KEY"]
+except KeyError:
+    st.error("Por favor, configure a variável OPENAI_API_KEY nos segredos do Streamlit.")
     st.stop()
 
 # Upload de arquivos
